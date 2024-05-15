@@ -46,9 +46,30 @@ const mostBlogs = (blogs) => {
     return { author: mostBlogskey, blogs: nameCounts[mostBlogskey]};
 }
 
+const mostLikes = (blogs) => {
+
+    let mostLikeskey
+    let mostLikesIndex = 0
+
+    const authorLikes = _.reduce(blogs, (acc, blog) => {
+        acc[blog.author] = (acc[blog.author] || 0) + blog.likes;
+        return acc;
+    }, {});
+
+    Object.entries(authorLikes).map(([k,v],i) => {
+        if (v>mostLikesIndex){
+            mostLikesIndex = i
+            mostLikeskey = k
+        } 
+    })
+  return { author: mostLikeskey, likes: authorLikes[mostLikeskey]};
+}
+
+
 module.exports = {
     dummy,
     totalLikes,
     favouriteBlog,
-    mostBlogs
+    mostBlogs,
+    mostLikes
 }
