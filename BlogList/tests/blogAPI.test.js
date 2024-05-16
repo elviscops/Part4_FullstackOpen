@@ -11,21 +11,21 @@ const initialBlogs = [
         "title": "Blog Title",
         "author": "Blog author",
         "url": "tvnet.lv",
-        "likes": 3,
+        "likes": 1,
         "id": "663921cd7e6e1445b3c7fbcc"
     },
     {
         "title": "Truth about Michele ",
         "author": "Barack Obama",
         "url": "Google.com",
-        "likes": 14,
+        "likes": 2,
         "id": "663921cd723e1445b3c7fbcc"
       },
     {
         "title": "How to make a Blog",
         "author": "Me",
         "url": "https://fullstackopen.com/",
-        "likes": 13,
+        "likes": 3,
         "id": "663d03c03ec70ae432ab9fc8"
     }
 ]
@@ -54,9 +54,12 @@ test('blogs are returned as json', async () => {
 test('correct number of blog posts', async () => {
     const response = await api.get('/api/blogs')  
     assert.strictEqual(response.body.length, 3)
-  })
+})
   
-
+test('strcture has id field', async () => {
+    const response = await api.get('/api/blogs')  
+    assert(response.body[0].hasOwnProperty("id"))
+})
 
 after(async () => {
     await mongoose.connection.close()
