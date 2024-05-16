@@ -30,6 +30,15 @@ const initialBlogs = [
     }
 ]
 
+const newBlogData = 
+    {
+        "title": "America is a nation that can be defined by single word - Asssfhhhtlllmmnfff",
+        "author": "Joe Biden",
+        "url": "Google.com",
+        "likes": 50
+    }
+
+
 beforeEach( async () => {
     await Blog.deleteMany({})
 
@@ -61,6 +70,17 @@ test('strcture has id field', async () => {
     assert(response.body[0].hasOwnProperty("id"))
 })
 
+test('blog post can be added', async () => {
+    await api.post('/api/blogs').send(newBlogData).expect(201).expect('Content-Type', /application\/json/)
+
+    const response = await api.get('/api/blogs')
+    const contents = response.body.map(r => r.title)
+  
+    assert.strictEqual(response.body.length, initialBlogs.length + 1)
+    assert(contents.includes('America is a nation that can be defined by single word - Asssfhhhtlllmmnfff'))
+})
+
+
 after(async () => {
     await mongoose.connection.close()
-})
+}) 

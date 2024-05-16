@@ -6,7 +6,7 @@ blogRouter.get('/api/blogs', async (request,response) => {
     response.json(blogs)
 })
 
-blogRouter.post('/api/blogs', async (request, response, next) => {
+blogRouter.post('/api/blogs', async (request, response) => {
     const body = request.body
 
     const blog = new Blog({
