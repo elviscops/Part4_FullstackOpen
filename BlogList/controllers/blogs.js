@@ -26,4 +26,42 @@ blogRouter.post('/api/blogs', async (request, response) => {
 
 })
 
+blogRouter.get('/api/blogs/:id', async (request,response) => {
+    const id = request.params.id
+
+    try {
+        const blog = await Blog.findById(id)
+        response.json(blog)
+    } catch (error) {
+        response.status(400).json({error})
+    }
+})
+
+blogRouter.delete('/api/blogs/:id', async (request,response) => {
+    const id = request.params.id
+
+    try {
+        const blog = await Blog.findByIdAndDelete(id)
+        response.json(blog)
+    } catch (error) {
+        response.status(400).json({error})
+    }
+})
+
+blogRouter.put('/api/blogs/:id', async (request,response) => {
+    const id = request.params.id
+
+    const updateLikes = {
+        likes: request.body.likes
+    }
+
+    try {
+        const updatedBlog = await Blog.findByIdAndUpdate(id,updateLikes,{ new: true })
+        response.json(updatedBlog)
+    } catch (error) {
+        response.status(400).json({error})
+    }
+
+})
+
 module.exports = blogRouter

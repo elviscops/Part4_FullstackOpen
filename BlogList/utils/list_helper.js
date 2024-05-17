@@ -1,5 +1,52 @@
 const _ = require('lodash'); 
 
+const initialBlogs = [
+    {
+        "title": "Blog Title",
+        "author": "Blog author",
+        "url": "tvnet.lv",
+        "likes": 1
+    },
+    {
+        "title": "Truth about Michele ",
+        "author": "Barack Obama",
+        "url": "Google.com",
+        "likes": 2
+      },
+    {
+        "title": "How to make a Blog",
+        "author": "Me",
+        "url": "https://fullstackopen.com/",
+        "likes": 3
+    }
+]
+
+const newBlogData = {
+    "title": "America is a nation that can be defined by single word - Asssfhhhtlllmmnfff",
+    "author": "Joe Biden",
+    "url": "Google.com",
+    "likes": 50
+}
+
+const newBlogData1 = {
+    "title": "How To Survive",
+    "author": "Joe Mama",
+    "url": "Google.com"
+}
+
+const newBlogData2 = {
+    "author": "John Doe",
+    "url": "netflix.com",
+    "likes": 13
+}
+
+const newBlogData3 = {
+    "title": "How To Delete",
+    "author": "Joe Mama",
+    "url": "Google.com"
+}
+
+
 const dummy = (blogs) => {
     return 1
 }
@@ -71,5 +118,11 @@ module.exports = {
     totalLikes,
     favouriteBlog,
     mostBlogs,
-    mostLikes
+    mostLikes,
+    initialBlogs,
+    newBlogData,
+    newBlogData1,
+    newBlogData2,
+    newBlogData3
+    
 }
