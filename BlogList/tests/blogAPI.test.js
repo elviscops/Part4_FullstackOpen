@@ -38,6 +38,13 @@ const newBlogData =
         "likes": 50
     }
 
+const newBlogData1 = 
+{
+    "title": "How To Survive",
+    "author": "Joe Mama",
+    "url": "Google.com"
+}
+
 
 beforeEach( async () => {
     await Blog.deleteMany({})
@@ -78,6 +85,13 @@ test('blog post can be added', async () => {
   
     assert.strictEqual(response.body.length, initialBlogs.length + 1)
     assert(contents.includes('America is a nation that can be defined by single word - Asssfhhhtlllmmnfff'))
+})
+
+
+test('likes property missing, defaulting likes to 0', async () => {
+    await api.post('/api/blogs').send(newBlogData1).expect(201).expect('Content-Type', /application\/json/)
+    const response = await api.get('/api/blogs')
+    assert.strictEqual(response.body[response.body.length-1].likes, 0)
 })
 
 
