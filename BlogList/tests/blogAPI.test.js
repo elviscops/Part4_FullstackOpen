@@ -45,6 +45,13 @@ const newBlogData1 =
     "url": "Google.com"
 }
 
+const newBlogData2 = 
+{
+    "author": "John Doe",
+    "url": "netflix.com",
+    "likes": 13
+}
+
 
 beforeEach( async () => {
     await Blog.deleteMany({})
@@ -94,6 +101,13 @@ test('likes property missing, defaulting likes to 0', async () => {
     assert.strictEqual(response.body[response.body.length-1].likes, 0)
 })
 
+
+test('title property missing, returning 400', async () => {
+    await api.post('/api/blogs').send(newBlogData2)
+    .expect(400)
+    .expect('Content-Type', /application\/json/)
+
+})
 
 after(async () => {
     await mongoose.connection.close()
