@@ -10,6 +10,10 @@ userRouter.get('/api/users', async (request,response) => {
 userRouter.post('/api/users', async (request, response) => {
     const {username, name, password} = request.body
 
+    if (username.length < 3 || password.length < 3) {
+        return response.status(400).json({error: "Username or password too short"})
+    }
+
     if (!username || !password){
         return response.status(400).json({error: "Username or password missing"})
     }
