@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs')
 const userRouter = require('express').Router()
 const User = require('../models/user')
+const Blog = require('../models/blog')
 
 userRouter.get('/api/users', async (request,response) => {
     const users = await User.find({}).populate('blogs',{url: 1, title: 1, author: 1})
@@ -31,43 +32,5 @@ userRouter.post('/api/users', async (request, response) => {
     response.status(201).json(savedUser)
 
 })
-
-// userRouter.get('/api/blogs/:id', async (request,response) => {
-//     const id = request.params.id
-
-//     try {
-//         const user = await User.findById(id)
-//         response.json(user)
-//     } catch (error) {
-//         response.status(400).json({error})
-//     }
-// })
-
-// userRouter.delete('/api/blogs/:id', async (request,response) => {
-//     const id = request.params.id
-
-//     try {
-//         const blog = await Blog.findByIdAndDelete(id)
-//         response.json(blog)
-//     } catch (error) {
-//         response.status(400).json({error})
-//     }
-// })
-
-// userRouter.put('/api/blogs/:id', async (request,response) => {
-//     const id = request.params.id
-
-//     const updateLikes = {
-//         likes: request.body.likes
-//     }
-
-//     try {
-//         const updatedBlog = await Blog.findByIdAndUpdate(id,updateLikes,{ new: true })
-//         response.json(updatedBlog)
-//     } catch (error) {
-//         response.status(400).json({error})
-//     }
-
-// })
 
 module.exports = userRouter
